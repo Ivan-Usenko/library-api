@@ -6,11 +6,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class LibraryController extends AbstractController
+class AdminController extends AbstractController
 {
-    #[Route('', name: 'index')]
-    public function index(): Response
+    #[Route('/add/book', name: 'add_book')]
+    public function addBook(): Response
     {
-        return $this->render('library/index.html.twig');
+        return $this->render('admin/add_book.html.twig');
     }
 }
