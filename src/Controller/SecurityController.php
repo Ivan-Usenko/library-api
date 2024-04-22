@@ -25,8 +25,8 @@ class SecurityController extends AbstractController
     }
 
     #[Route(path: '/logout', name: 'app_logout')]
-    public function logout(): Response
+    public function logout(): void
     {
-        return $this->redirectToRoute('index');
+        
     }
 }
