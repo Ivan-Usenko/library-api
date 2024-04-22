@@ -11,6 +11,6 @@ class LibraryController extends AbstractController
     #[Route('', name: 'index')]
     public function index(): Response
     {
-        return $this->render('index.html.twig');
+        return $this->render('library/index.html.twig');
     }
 }
