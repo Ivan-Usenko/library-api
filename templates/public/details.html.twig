@@ -3,5 +3,27 @@
 {% block title %}Деталі{% endblock %}
 
 {% block body %}
-
+    <h1>{{ book.title }}</h1>
+    <p>
+        <b>Автори: </b>
+        {% for author in book.authors %}
+            {{ author.getInitials }}{% if not loop.last %}, {% endif %}
+        {% endfor %}
+    </p>
+    <p>
+        <b>Жанри: </b>
+        {% for genre in book.genres %}
+            {{ genre.name }}{% if not loop.last %}, {% endif %}
+        {% endfor %}
+    </p>
+    {% if app.user %}
+        <hr>
+        <a href="#"><button>Додати до обраного</button></a>
+        {% if 'ROLE_ADMIN' in app.user.roles %}
+            <a href="#"><button>Видалити книгу</button></a>
+        {% endif %}
+    {% endif %}
+    <hr>
+    <h3>Опис</h3>
+    {{ book.description }}
 {% endblock %}

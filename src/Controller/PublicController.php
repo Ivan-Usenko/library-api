@@ -38,6 +38,11 @@ class PublicController extends AbstractController
     #[Route('/books/{slug}', name: 'details')]
     public function details(string $slug): Response
     {
-        return $this->render('public/details.html.twig');
+        $book = $this->em->getRepository(Book::class)->findOneBy(['slug' => $slug]);
+        if (!$book) return $this->redirectToRoute('catalog');
+
+        return $this->render('public/details.html.twig', [
+            'book' => $book
+        ]);
     }
 }
