@@ -35,7 +35,13 @@ class BookType extends AbstractType
                 'choice_label' => function (Author $author) {
                     return $author->getInitials();
                 },
-                'multiple' => true
+                'multiple' => true,
+                'constraints' => [
+                    new Count([
+                        'min' => 1,
+                        'minMessage' => 'Книга повинна мати хоча б одного автора!'
+                    ])
+                ]
             ])
             ->add('genres', EntityType::class, [
                 'class' => Genre::class,
