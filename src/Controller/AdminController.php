@@ -80,4 +80,13 @@ class AdminController extends AbstractController
             'form' => $form->createView()
         ]);
     }
+
+    #[Route('/remove/book/{id}', name: 'remove_book')]
+    public function removeBook(int $id): Response
+    {
+        $book = $this->em->getRepository(Book::class)->find($id);
+        $this->em->remove($book);
+        $this->em->flush();
+        return $this->redirectToRoute('catalog');
+    }
 }

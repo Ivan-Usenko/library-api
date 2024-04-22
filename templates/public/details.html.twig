@@ -20,7 +20,7 @@
         <hr>
         <a href="#"><button>Додати до обраного</button></a>
         {% if 'ROLE_ADMIN' in app.user.roles %}
-            <a href="#"><button>Видалити книгу</button></a>
+            <a href="{{ path('remove_book', {id: book.id}) }}"><button>Видалити книгу</button></a>
         {% endif %}
     {% endif %}
     <hr>
