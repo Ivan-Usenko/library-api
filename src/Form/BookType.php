@@ -9,6 +9,8 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Count;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class BookType extends AbstractType
 {
@@ -40,7 +42,13 @@ class BookType extends AbstractType
                 'label' => 'Жанри',
                 'choice_label' => 'name',
                 'multiple' => true,
-                'expanded' => true
+                'expanded' => true,
+                'constraints' => [
+                    new Count([
+                        'min' => 1,
+                        'minMessage' => 'Книга повинна мати хоча б один жанр!'
+                    ])
+                ]
             ])
         ;
     }
