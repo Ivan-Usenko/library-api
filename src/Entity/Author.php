@@ -58,6 +58,11 @@ class Author
         return $this;
     }
 
+    public function getInitials(): ?string
+    {
+        return $this->firstName . " " . substr($this->surname, 0, 2) . ".";
+    }
+
     /**
      * @return Collection<int, Book>
      */

@@ -4,4 +4,24 @@
 
 {% block body %}
 <h1>Каталог книг</h1>
+<hr>
+{% for book in books %}
+    <h3>{{ book.title }}</h3>
+    <p>{{ book.description|length < 400 ? book.description : book.description|slice(0, 400) ~ "..." }}</p>
+    <p>
+        <b>Автори: </b>
+        {% for author in book.authors %}
+            {{ author.getInitials }}{% if not loop.last %}, {% endif %}
+        {% endfor %}
+    </p>
+    <p>
+        <b>Жанри: </b>
+        {% for genre in book.genres %}
+            {{ genre.name }}{% if not loop.last %}, {% endif %}
+        {% endfor %}
+    </p>
+    <br><br>
+    <a href="{{ path('details', {slug: book.slug}) }}"><button>Детальніше</button></a>
+    <hr>
+{% endfor %}
 {% endblock %}
