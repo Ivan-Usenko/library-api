@@ -50,9 +50,15 @@ composer require symfony/serializer
 змінити "postgres:admin" на логін користувача PostgreSQL і його пароль відповідно.
 
 В терміналі виконати команду створення бази
-`symfony console doctrine:database:create`
+```
+symfony console doctrine:database:create
+```
 Виконати міграції
-`symfony console doctrine:migrations:migrate`
+```
+symfony console doctrine:migrations:migrate
+```
 Запустити локальний сервер
-`symfony server:start`
+```
+symfony server:start
+```
 Відкрити в браузері локальний сервер [127.0.0.1:8000](http://127.0.0.1:8000)
