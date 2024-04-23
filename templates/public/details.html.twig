@@ -18,7 +18,11 @@
     </p>
     {% if app.user %}
         <hr>
-        <a href="#"><button>Додати до обраного</button></a>
+        {% if book in app.user.savedBooks %}
+            <p>Ця книга додана до збереженого. <a href="{{ path('selected') }}">Переглянути...</a></p> 
+        {% else %}
+            <a href="{{ path('select_book', {id: book.id}) }}"><button>Додати до обраного</button></a>
+        {% endif %}
         {% if 'ROLE_ADMIN' in app.user.roles %}
             <a href="{{ path('remove_book', {id: book.id}) }}"><button>Видалити книгу</button></a>
         {% endif %}

@@ -1,0 +1,27 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Обране{% endblock %}
+
+{% block body %}
+<h1>Обрані книги</h1>
+<p>{{ app.user.email }}</p>
+<hr>
+{% for book in books %}
+    <h1>{{ book.title }}</h1>
+    <p>
+        <b>Автори: </b>
+        {% for author in book.authors %}
+            {{ author.getInitials }}{% if not loop.last %}, {% endif %}
+        {% endfor %}
+    </p>
+    <p>
+        <b>Жанри: </b>
+        {% for genre in book.genres %}
+            {{ genre.name }}{% if not loop.last %}, {% endif %}
+        {% endfor %}
+    </p>
+    <a href="{{ path('details', { slug: book.slug }) }}"><button>Детальніше</button></a>
+    <a href="{{ path('remove_selected', { id: book.id }) }}"><button>Видалити з обраного</button></a>
+    <hr>
+{% endfor %}
+{% endblock %}
