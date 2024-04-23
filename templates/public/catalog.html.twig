@@ -4,6 +4,9 @@
 
 {% block body %}
 <h1>Каталог книг</h1>
+{% if app.user and ("ROLE_ADMIN" in app.user.roles) %}
+    <a href="{{ path('export') }}"><button>Експортувати в csv</button></a>
+{% endif %}
 <hr>
 {% for book in books %}
     <h3>{{ book.title }}</h3>

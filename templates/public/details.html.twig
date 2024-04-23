@@ -16,6 +16,10 @@
             {{ genre.name }}{% if not loop.last %}, {% endif %}
         {% endfor %}
     </p>
+    <p>
+        <b>Дата виходу: </b>
+        {{ book.releaseDate|date("d/m/Y") }}
+    </p>
     {% if app.user %}
         <hr>
         {% if book in app.user.savedBooks %}

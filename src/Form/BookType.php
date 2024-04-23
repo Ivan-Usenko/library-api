@@ -56,6 +56,10 @@ class BookType extends AbstractType
                     ])
                 ]
             ])
+            ->add('releaseDate', null, [
+                'widget' => 'single_text',
+                'label' => 'Дата виходу'
+            ])
         ;
     }
 

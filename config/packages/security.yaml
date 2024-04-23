@@ -32,6 +32,8 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         - { path: ^/add, roles: ROLE_ADMIN }
+        - { path: ^/remove, roles: ROLE_ADMIN }
+        - { path: ^/export, roles: ROLE_ADMIN }
         - { path: ^/user, roles: ROLE_USER }
 
 when@test:

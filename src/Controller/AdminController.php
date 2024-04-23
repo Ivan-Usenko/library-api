@@ -15,6 +15,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\Encoder\CsvEncoder;
+use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
 class AdminController extends AbstractController
 {
@@ -88,5 +92,39 @@ class AdminController extends AbstractController
         $this->em->remove($book);
         $this->em->flush();
         return $this->redirectToRoute('catalog');
+    }
+
+    #[Route('/export', name: 'export')]
+    public function export(): Response
+    {
+        $books = $this->em->getRepository(Book::class)->findAll();
+        
+        $booksFormated = [];
+        foreach ($books as $book) {
+            $genres = '';
+            for ($i = 0; $i < sizeof($book->getGenres()); $i++) {
+                $genres .= $book->getGenres()[$i]->getName() . ( $i == sizeof($book->getGenres()) - 1 ? '' : ', ');
+            }
+            $authors = '';
+            for ($i = 0; $i < sizeof($book->getAuthors()); $i++) {
+                $authors .= $book->getAuthors()[$i]->getInitials() . ( $i == sizeof($book->getAuthors()) - 1 ? '' : ', ');
+            }
+            $bookArr = [
+                'Назва' => $book->getTitle(),
+                'Дата виходу' => $book->getReleaseDate()->format('d/m/Y'),
+                'Жанри' => $genres,
+                'Автори' => $authors,
+            ];
+            $booksFormated[] = $bookArr;
+        }
+
+        $serializer = new Serializer([new ObjectNormalizer()], [new CsvEncoder()]);
+        $csv = $serializer->serialize($booksFormated, 'csv');
+
+        $response = new Response($csv);
+        $response->headers->set('Content-Encoding', 'UTF-8');
+        $response->headers->set('Content-Type', 'text/csv; charset=UTF-8');
+        $response->headers->set('Content-Disposition', 'attachment; filename=sample.csv');
+        return $response;
     }
 }
