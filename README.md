@@ -46,8 +46,10 @@ composer require symfony/serializer
 ```
 ## Створення бази даних
 В файлі `.env` в рядку
-`DATABASE_URL="postgresql://postgres:admin@127.0.0.1:5432/library?serverVersion=16&charset=utf8"`
-змінити "postgres:admin" на логін користувача PostgreSQL і його пароль відповідно.
+```
+DATABASE_URL="postgresql://postgres:admin@127.0.0.1:5432/library?serverVersion=16&charset=utf8"
+```
+змінити `postgres:admin` на логін користувача PostgreSQL і його пароль відповідно.
 
 В терміналі виконати команду створення бази
 ```
