@@ -6,6 +6,25 @@
     <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
+    <hr>
+    <p>
+        <a href="{{ path('index') }}">Головна сторінка</a>
+        ----
+        <a href="{{ path('catalog') }}">Каталог книг</a>
+        |----|
+        {% if app.user %}
+        Ви ввішли як {{ app.user.email }}, <a href="{{ path('app_logout') }}">Вийти</a>
+        |--|
+        <a href="{{ path('selected') }}">Обрані книги</a>
+        {% else %}
+            <a href="{{ path('app_register') }}">Реєстрація</a>
+            або
+            <a href="{{ path('app_login') }}">Вхід</a>
+        {% endif %}
+        |
+    </p>
+    <hr>
+    <br>
     {% block body %}{% endblock %}
 </body>
 </html>
