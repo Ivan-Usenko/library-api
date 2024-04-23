@@ -5,7 +5,10 @@
 {% block body %}
 <h1>Каталог книг</h1>
 {% if app.user and ("ROLE_ADMIN" in app.user.roles) %}
-    <a href="{{ path('export') }}"><button>Експортувати в csv</button></a>
+    <a href="{{ path('export') }}"><button>Експортувати в книги csv</button></a>
+    <a href="{{ path('add_book') }}"><button>Додати книгу</button></a>
+    <a href="{{ path('add_author') }}"><button>Додати автора</button></a>
+    <a href="{{ path('add_genre') }}"><button>Додати жанр</button></a>
 {% endif %}
 <hr>
 {% for book in books %}
