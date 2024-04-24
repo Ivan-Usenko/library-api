@@ -33,16 +33,9 @@ git init
 git pull https://github.com/Ivan-Usenko/library-api.git
 ```
 ## Встановлення небхідних компонентів
-Виконати в терміналі наступні команди
+Виконати в терміналі наступну командну
 ```
-composer require symfony/maker-bundle --dev
-composer require symfony/orm-pack
-composer require symfony/twig-bundle
-composer require symfony/security-bundle
-composer require form validator
-composer require symfony/string
-composer require symfony/intl
-composer require symfony/serializer
+composer install
 ```
 ## Створення бази даних
 В файлі `.env` в рядку
